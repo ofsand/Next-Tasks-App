@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import useLocalStorageState from "./useLocalStorageState";
 
 // Define the structure for each task in the todo list
 type Task = {
@@ -7,10 +8,7 @@ type Task = {
 };
 
 export const useTasksList = () => {
-	const [tasks, setTasks] = useState<Task[]>(() => {
-		const storedTasks = localStorage.getItem('tasks');
-		return storedTasks ? JSON.parse(storedTasks) : [];
-	});
+	const [tasks, setTasks] = useLocalStorageState<Task[]>('tasks', [])
 	const [input, setInput] = useState<string>("");
 
 	useEffect(() => {
@@ -29,6 +27,7 @@ export const useTasksList = () => {
 		const updatedTasks = tasks.map((t) =>
 			t === task ? { ...t, completed: !t.completed } : t
 		);
+        console.log(updatedTasks);
 		setTasks(updatedTasks);
 	};
 

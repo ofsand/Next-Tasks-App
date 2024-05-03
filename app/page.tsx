@@ -2,7 +2,6 @@
 import { useTasksList } from "@/hooks/useTasksList";
 import React, { useState, useEffect, useRef } from "react";
 
-
 const TodoApp: React.FC = () => {
 
 	const {tasks, input, setInput, addTask, deleteTask, completeTask} = useTasksList();
